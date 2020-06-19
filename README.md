@@ -16,4 +16,7 @@ Clone the repo, and `npm install`
 #### Flags
 `--explain`
 
-  - Explainss how the weekday was calculated.
+  - Explains how the weekday was calculated.
+
+# Testing
+Run `npm run test`

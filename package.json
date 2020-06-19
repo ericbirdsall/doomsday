@@ -1,0 +1,17 @@
+{
+  "name": "doomsday",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --timeout 10000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^8.0.1",
+    "moment": "^2.26.0",
+    "yargs": "^15.3.1"
+  }
+}

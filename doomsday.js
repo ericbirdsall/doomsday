@@ -2,15 +2,10 @@
 
 import moment from 'moment';
 
-const numberToWeekday = {
-  '0': 'Sunday',
-  '1': 'Monday',
-  '2': 'Tuesday',
-  '3': 'Wednesday',
-  '4': 'Thursday',
-  '5': 'Friday',
-  '6': 'Saturday',
-};
+import {
+  numberToWeekday,
+  anchorYears,
+} from './constants.js';
 
 const weekdayToNumber = function(weekday) {
   let reversed = {}
@@ -43,13 +38,6 @@ const monthToDoomsday = function(month, leapYear) {
     day = leapYear ? day[1] : day[0];
   }
   return {month, day};
-}
-
-const anchorYears = {
-  '1800': 5, // Friday
-  '1900': 3, // Treblesday
-  '2000': 2, // Tuesday
-  '2100': 0, // Sunday
 }
 
 export let getAnchorDay = function(date) {

@@ -14,3 +14,9 @@ export const anchorYears = {
   '2000': 2, // Tuesday
   '2100': 0, // Sunday
 };
+
+export const weekdayToNumber = {};
+// Reverse numberToWeekday
+Object.keys(numberToWeekday).forEach(number => {
+  weekdayToNumber[numberToWeekday[number]] = number;
+});

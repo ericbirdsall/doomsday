@@ -3,9 +3,10 @@ import moment from 'moment';
 import {
   getAnchorDay,
   getDoomsdayInMonth,
-  isLeapYear,
   getWeekdayForDate,
 } from '../doomsday.js';
+
+import {isLeapYear} from '../is_leap_year.js';
 
 describe('Doomsday', function () {
   describe('getAnchorDay', function () {

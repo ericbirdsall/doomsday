@@ -4,17 +4,11 @@ import moment from 'moment';
 
 import {
   numberToWeekday,
+  weekdayToNumber,
   anchorYears,
 } from './constants.js';
 
-const weekdayToNumber = function(weekday) {
-  let reversed = {}
-  Object.keys(numberToWeekday).forEach(number => {
-    reversed[numberToWeekday[number]] = number;
-  });
-
-  return +reversed[weekday];
-}
+import {isLeapYear} from './is_leap_year.js';
 
 const monthToDoomsday = function(month, leapYear) {
   // March Doomsday is last day of February
@@ -63,19 +57,6 @@ export let getAnchorDay = function(date) {
 }
 
 /**
- * Calculates whether the given year is a leap year
- * @param {String} Year (YYYY)
- * @returns {Boolean} True if the given year is a leap year, otherwise false
-*/
-export let isLeapYear = function(year) {
-  year = +year;
-  if (year % 100 === 0) {
-    return Math.floor(year / 400) === (year / 400);
-  }
-  return year % 4 === 0;
-}
-
-/**
  * Calculates the closest doomsday date in a month to the given date
  * @param {String} Date in ISO format (YYYY-MM-DD)
  * @returns {String} Date in ISO format (YYYY-MM-DD)
@@ -93,7 +74,7 @@ export let getFinalDayOfWeekFromDoomsday = function(monthDoomsday, date, anchorD
   // https://en.wikipedia.org/wiki/Standard_time_in_the_United_States#:~:text=The%20history%20of%20standard%20time,standard%20time%20in%20time%20zones.
   let dayDiff = moment.utc(date).startOf('day').diff(moment.utc(monthDoomsday).startOf('day'), 'days');
 
-  let anchorNumber = weekdayToNumber(anchorDay);
+  let anchorNumber = +weekdayToNumber[anchorDay];
 
   dayDiff = (dayDiff + anchorNumber) % 7;
   if (dayDiff < 0) {
@@ -104,7 +85,6 @@ export let getFinalDayOfWeekFromDoomsday = function(monthDoomsday, date, anchorD
 }
 
 export let getWeekdayForDate = function(date) {
-  // console.log('entered date', date)
   let anchorDay = getAnchorDay(date);
   // console.log(anchorDay)
   let closestDoomsdayInMonth = getDoomsdayInMonth(date);

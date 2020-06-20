@@ -72,7 +72,7 @@ export let getFinalDayOfWeekFromDoomsday = function(monthDoomsday, date, anchorD
   // Need to use UTC because standard time was implemented on Nov 19 1883
   // and this messes with the moment.diff calculation
   // https://en.wikipedia.org/wiki/Standard_time_in_the_United_States#:~:text=The%20history%20of%20standard%20time,standard%20time%20in%20time%20zones.
-  let dayDiff = moment.utc(date).startOf('day').diff(moment.utc(monthDoomsday).startOf('day'), 'days');
+  let dayDiff = moment.utc(date).diff(moment.utc(monthDoomsday), 'days');
 
   let anchorNumber = +weekdayToNumber[anchorDay];
 

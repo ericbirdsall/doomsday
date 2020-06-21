@@ -1,4 +1,9 @@
-
+/**
+ * Calculates the Doomsday for a given month and leap year
+ * @param {String} Month padded to length 2 with zeroes
+ * @param {Boolean} true if the given year is a leap year, otherwise false
+ * @returns {Object: {String month, String day}} Doomsday for given month and leap year
+*/
 export const monthToDoomsday = function(month, leapYear) {
   // March Doomsday is last day of February
   if (month === '03') {

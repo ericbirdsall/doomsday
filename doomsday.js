@@ -9,6 +9,7 @@ import {
 } from './constants.js';
 
 import {isLeapYear} from './is_leap_year.js';
+import logger from './logger.js';
 
 const monthToDoomsday = function(month, leapYear) {
   // March Doomsday is last day of February
@@ -42,13 +43,13 @@ export let getAnchorDay = function(date) {
   let yearFloor = Math.floor(lastTwoYearDigits / 12);
   let yearRemainder = lastTwoYearDigits % 12;
   let secondaryQuotient = Math.floor(yearRemainder / 4);
-  // console.log(`A: Floor of ${lastTwoYearDigits} / 12: ${yearFloor}`);
-  // console.log(`B: Remainder of above: ${yearRemainder}`);
+  logger.explain(`A: Floor of ${lastTwoYearDigits} / 12: ${yearFloor}`);
+  logger.explain(`B: Remainder of above: ${yearRemainder}`);
   secondaryQuotient = secondaryQuotient % 7;
-  // console.log(`C: Floor of above / 4: ${secondaryQuotient}`);
+  logger.explain(`C: Floor of above / 4: ${secondaryQuotient}`);
   let d = (yearFloor + yearRemainder + secondaryQuotient) % 7;
 
-  // console.log(`D: Sum of above mod 7:  ${d}`);
+  logger.explain(`D: Sum of above mod 7:  ${d}`);
   let anchor = year.substring(0, 2) + '00';
 
   let dayIndex = (d + anchorYears[anchor]) % 7;
@@ -86,16 +87,16 @@ export let getFinalDayOfWeekFromDoomsday = function(monthDoomsday, date, anchorD
 
 export let getWeekdayForDate = function(date) {
   let anchorDay = getAnchorDay(date);
-  // console.log(anchorDay)
+  logger.explain(`The year's anchor day is ${anchorDay}`);
+
   let closestDoomsdayInMonth = getDoomsdayInMonth(date);
-  // console.log(closestDoomsdayInMonth);
-  // console.log(`${closestDoomsdayInMonth} is a ${anchorDay}`);
-  let answer = getFinalDayOfWeekFromDoomsday(closestDoomsdayInMonth, date, anchorDay);
-  return answer;
+  logger.explain(`${closestDoomsdayInMonth} is a ${anchorDay}`);
+
+  return getFinalDayOfWeekFromDoomsday(closestDoomsdayInMonth, date, anchorDay);
 }
 
 // Takes date in ISO String from (e.g. 2020-05-16)
 export default function (date) {
   let weekday = getWeekdayForDate(date);
-  console.log(`${date} is a ${weekday}`);
+  logger.log(`${date} is a ${weekday}`);
 }

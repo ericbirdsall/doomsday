@@ -17,6 +17,9 @@ export const monthToDoomsday = function(month, leapYear) {
     '11': '07',
     '12': '12',
   }[month];
+  if (!day) {
+    throw new Error(`Invalid month`);
+  }
   if (Array.isArray(day)) {
     day = leapYear ? day[1] : day[0];
   }
